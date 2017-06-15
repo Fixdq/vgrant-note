@@ -1,0 +1,69 @@
+安装环境
+os linux mint 18.1
+
+安装Vagrant
+sudo apt-get install vagrant
+vagrant -v
+Vagrant 1.8.1
+
+安装virtualbox
+sudo apt-get install virtualbox
+vboxmanage -v
+5.0.40_Ubuntur115130
+
+上面的信息显示
+Vagrant的版本：1.8.1
+Virtualbox的版本：5.0.40
+
+
+下载 .box 文件 我使用的是Ubuntu的
+地址：https://cloud-images.ubuntu.com/
+
+相关vagrant 命令
+vagrant box add
+vagrant init
+vagrant up
+
+启动信息显示 guest VM 与 VirtualBox的 Guest Additions 的版本不符 
+
+下面解决Guest Additions 不匹配的问题
+
+第一步
+下载与Virtualbox 版本相匹配的 guest Additions版本 
+Virtualbox版本：5.0.40
+下载地址：http://download.virtualbox.org/virtualbox/
+VBoxGuestAdditions_5.0.40.iso
+
+第二步
+vagrant修改配置文件 创建共享目录 
+将 VBoxGuestAdditions_5.0.40.iso 放入共享目录
+重启虚拟机系统
+
+第三步
+登录到虚拟机
+vagrant up
+vagratn ssh
+修改源
+sudo apt-get update
+sudo mkdir /home/download
+sudp cp /home/www/VBoxGuestAdditions_5.0.40.iso /home/download
+sudo mkdir /mnt/VBGA/
+sudo mount VBoxGuestAdditions_X.X.XX.iso /mnt/VBGA/
+cd /mnt/VBGA/
+sudo ./VBoxLinuxAdditions.run
+exit
+
+vagrant up
+Guest Additions 问题就被解决
+
+
+
+
+
+
+
+
+
+
+
+
