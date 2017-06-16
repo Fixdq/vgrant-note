@@ -11,6 +11,10 @@ sudo apt-get install virtualbox
 vboxmanage -v
 5.0.40_Ubuntur115130
 
+安装NFS支持
+sudo apt-get install nfs-kernel-server
+
+
 上面的信息显示
 Vagrant的版本：1.8.1
 Virtualbox的版本：5.0.40
