@@ -13,7 +13,89 @@ deb-src http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted univer
 deb-src http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverse
 
 ---------------------------------------------------------
+---------------------------------------------------------
+Nginx
+1、首先添加nginx_signing.key(必须，否则出错)
 
+wget http://nginx.org/keys/nginx_signing.key
+sudo apt-key add nginx_signing.key
+
+2、添加Nginx(http://nginx.org/)官方提供的源
+
+稳定版For stable release
+deb http://nginx.org/packages/ubuntu/ trusty nginx
+deb-src http://nginx.org/packages/ubuntu/ trusty nginx
+
+开发板For mainline
+deb http://nginx.org/packages/mainline/ubuntu/ trusty nginx
+deb-src http://nginx.org/packages/mainline/ubuntu/ trusty nginx
+
+官方源格式介绍
+deb http://nginx.org/packages/ubuntu/ codename nginx
+deb-src http://nginx.org/packages/ubuntu/ codename nginx
+
+codename 对应 linux相关的发行版
+
+Ubuntu:
+Version	Codename	Supported Platforms
+12.04	precise	x86_64, i386
+14.04	trusty	x86_64, i386, aarch64/arm64
+16.04	xenial	x86_64, i386, ppc64el, aarch64/arm64
+16.10	yakkety	x86_64, i386
+
+相关链接
+
+安装方法 版本介绍
+http://nginx.org/en/linux_packages.html
+
+Nginx官网
+http://nginx.org/
+
+3、更新源并安装Nginx
+
+sudo apt-get update
+sudo apt-get install nginx
+
+查看版本
+nginx -v
+---------------------------------------------------------
+---------------------------------------------------------
+Nginx配置
+1、在/etc/nginx/nginx.conf文件中的第一行查看你的Nginx用户。
+less /etc/nginx/nginx.conf
+
+2、修改用户和组
+PHP7默认的用户和组是www-data。
+如果你的Nginx用户名也是www-data，那么不需要做下面的修改。
+如果你的Nginx用户名是nginx，那么你可以在/etc/nginx/nginx.conf文件中将它修改成www-data.
+sudo vi /etc/nginx/nginx.conf
+
+3、重启Nginx服务
+sudo service nginx reload
+---------------------------------------------------------
+---------------------------------------------------------
+PHP
+
+1、添加PPA
+sudo apt-get install python-software-properties software-properties-common
+sudo add-apt-repository ppa:ondrej/php
+sudo apt-get update
+
+2、安装PHP7以及所需的一些扩展
+$ sudo apt-get install php7.0-fpm php7.0-mysql php7.0-common php7.0-curl php7.0-cli php7.0-mcrypt php7.0-mbstring php7.0-dom
+
+3、配置PHP7
+打开php.ini配置文件:
+sudo vim /etc/php/7.0/fpm/php.ini
+
+找到cgi.fix_pathinfo选项，去掉注释;，然后将值设置为0:
+cgi.fix_pathinfo=0
+
+启用php7.0-mcrypt
+sudo phpenmod mcrypt
+启动后重启php7.0-fpm,输入:sudo service php5-fpm restart
+---------------------------------------------------------
+---------------------------------------------------------
 更新软件，系统
 sudo apt-get update
 sudo apt-get upgrade
@@ -23,19 +105,24 @@ sudo apt-get install chromium-browser chromium-browser-l10n
 
 安装Flash Player
 sudo apt-get install pepperflashplugin-nonfree
+---------------------------------------------------------
+---------------------------------------------------------
 
 删除软件
---------------------------------------------------------
+
 # 删除软件及其配置文件
 sudo apt-get --purge remove <package>
+
 # 删除没用的依赖包
 sudo apt-get autoremove <package>
+
 # 此时dpkg的列表中有“rc”状态的软件包，可以执行如下命令做最后清理：
 dpkg -l |grep ^rc|awk '{print $2}' |sudo xargs dpkg -P
 ---------------------------------------------------------
+---------------------------------------------------------
 
 Vagrant 的简单配置
------------------------------------------------------
+
 Vagrant.configure(2) do |config|
    config.vm.box = "unbuntu1204"
    config.vm.network "private_network", ip: "192.168.199.100"
@@ -46,5 +133,66 @@ Vagrant.configure(2) do |config|
      vb.name = "buntu120464"
    end
 end
--------------------------------------------------------
+---------------------------------------------------------
+---------------------------------------------------------
+ubuntu完全卸载Java
+1、移除所有Java相关包(Sun,Oracle,OpenJDK,IcedTea plugins,GIJ):
+sudo apt-get update
+sudo apt-cache search java | awk '{print($1)}' | grep -E -e '^(ia32-)?(sun|oracle)-java' -e '^openjdk-' -e '^icedtea' -e '^(default|gcj)-j(re|dk)' -e '^gcj-(.*)-j(re|dk)' -e 'java-common' | xargs sudo apt-get -y remove
+apt-get -y autoremove
+
+2、清除配置信息:  
+dpkg -l | grep ^rc | awk '{print($2)}' | xargs sudo apt-get -y purge
+
+3、清除java配置及缓存:  
+bash -c 'ls -d /home/*/.java' | xargs sudo rm -rf
+
+4、手动清除JVMs:  
+rm -rf /usr/lib/jvm/*
+---------------------------------------------------------
+Ubuntu安装Oracle Java8 
+
+sudo add-apt-repository ppa:webupd8team/java
+sudo apt-get update
+sudo apt-get install java-common oracle-java8-installer
+设置java 的环境变量
+sudo apt-get install oracle-java8-set-default
+---------------------------------------------------------
+---------------------------------------------------------
+ubuntu 安装phpstorm 
+官方的安装教程
+https://www.jetbrains.com/help/phpstorm/installing-and-launching.html
+
+1、官网下载最新的PhpStorm-2017.1.4.tar.gz
+2、sudo tar xf PhpStorm-*.tar.gz -C /opt/
+3、cd opt/PhpStorm-*/bin
+4、./phpstorm.sh
+
+
+---------------------------------------------------------
+---------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
