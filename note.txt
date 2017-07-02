@@ -25,6 +25,16 @@ deb-src http://mirrors.aliyun.com/ubuntu/ xenial-proposed main restricted univer
 deb-src http://mirrors.aliyun.com/ubuntu/ xenial-backports main restricted universe multiverse
 ---------------------------------------------------------
 ---------------------------------------------------------
+修改ubuntu 服务器的locale
+locale -a
+
+//安装
+sudo locale-gen zh_CN.UTF-8
+//export导入locale变量
+export  LANG="zh_CN.UTF-8"  
+---------------------------------------------------------
+---------------------------------------------------------
+
 Nginx
 1、首先添加nginx_signing.key(必须，否则出错)
 

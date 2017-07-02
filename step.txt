@@ -50,12 +50,15 @@ vagratn ssh
 修改源
 sudo apt-get update
 sudo mkdir /home/download
-sudp cp /home/www/VBoxGuestAdditions_5.0.40.iso /home/download
+sudo cp /home/www/VBoxGuestAdditions_5.0.40.iso /home/download
 sudo mkdir /mnt/VBGA/
 sudo mount VBoxGuestAdditions_X.X.XX.iso /mnt/VBGA/
 cd /mnt/VBGA/
 sudo ./VBoxLinuxAdditions.run
 exit
+
+sudo mkdir /home/download && sudo cp VBoxGuestAdditions_5.0.40.iso /home/download && sudo mkdir /mnt/VBGA/ && sudo mount VBoxGuestAdditions_5.0.40.iso /mnt/VBGA/ && cd /mnt/VBGA/ && sudo ./VBoxLinuxAdditions.run 
+
 
 vagrant up
 Guest Additions 问题就被解决
