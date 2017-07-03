@@ -1,0 +1,13 @@
+1、安装源
+      sudo add-apt-repository ppa:wine/wine-builds
+      sudo apt-get update
+2、安装wine
+     sudo apt-get install --install-recommends wine-staging
+     sudo apt-get install winehq-staging
+3、卸载wine
+     1).卸载wine主程序，在终端里输入：
+       sudo apt-get remove --purge wine
+     2).然后删除wine的目录文件：
+       rm -r ~/.wine
+     3).卸载残留不用的软件包：
+       sudo apt-get autoremove

@@ -1,0 +1,10 @@
+ubuntu 安装phpstorm 
+官方的安装教程
+https://www.jetbrains.com/help/phpstorm/installing-and-launching.html
+
+1、官网下载最新的PhpStorm-2017.1.4.tar.gz
+2、sudo tar xf PhpStorm-*.tar.gz -C /opt/
+3、cd opt/PhpStorm-*/bin
+4、./phpstorm.sh
+
+

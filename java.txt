@@ -1,0 +1,22 @@
+ubuntu完全卸载Java
+1、移除所有Java相关包(Sun,Oracle,OpenJDK,IcedTea plugins,GIJ):
+sudo apt-get update
+sudo apt-cache search java | awk '{print($1)}' | grep -E -e '^(ia32-)?(sun|oracle)-java' -e '^openjdk-' -e '^icedtea' -e '^(default|gcj)-j(re|dk)' -e '^gcj-(.*)-j(re|dk)' -e 'java-common' | xargs sudo apt-get -y remove
+apt-get -y autoremove
+
+2、清除配置信息:  
+dpkg -l | grep ^rc | awk '{print($2)}' | xargs sudo apt-get -y purge
+
+3、清除java配置及缓存:  
+bash -c 'ls -d /home/*/.java' | xargs sudo rm -rf
+
+4、手动清除JVMs:  
+rm -rf /usr/lib/jvm/*
+---------------------------------------------------------
+Ubuntu安装Oracle Java8 
+
+sudo add-apt-repository ppa:webupd8team/java
+sudo apt-get update
+sudo apt-get install java-common oracle-java8-installer
+设置java 的环境变量
+sudo apt-get install oracle-java8-set-default

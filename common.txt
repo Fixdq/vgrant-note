@@ -1,0 +1,60 @@
+替换源
+--------------------------------------------------------
+14.04
+deb http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ trusty-updates main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ trusty-updates main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverse
+
+16.04
+deb http://mirrors.aliyun.com/ubuntu/ xenial main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ xenial-security main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ xenial-updates main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ xenial-proposed main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ xenial-backports main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ xenial main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ xenial-security main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ xenial-updates main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ xenial-proposed main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ xenial-backports main restricted universe multiverse
+---------------------------------------------------------
+---------------------------------------------------------
+修改ubuntu 服务器的locale
+locale -a
+
+//安装
+sudo locale-gen zh_CN.UTF-8
+//export导入locale变量
+export  LANG="zh_CN.UTF-8"  
+---------------------------------------------------------
+---------------------------------------------------------
+
+删除软件
+
+# 删除软件及其配置文件
+sudo apt-get --purge remove <package>
+
+# 删除没用的依赖包
+sudo apt-get autoremove <package>
+
+# 此时dpkg的列表中有“rc”状态的软件包，可以执行如下命令做最后清理：
+dpkg -l |grep ^rc|awk '{print $2}' |sudo xargs dpkg -P
+---------------------------------------------------------
+---------------------------------------------------------
+
+安装chrome浏览器 中文包
+sudo apt-get install chromium-browser chromium-browser-l10n
+
+安装Flash Player
+sudo apt-get install pepperflashplugin-nonfree
+
+---------------------------------------------------------
+---------------------------------------------------------
+
+
